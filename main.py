@@ -95,8 +95,8 @@ def telegram_bot(token: str) -> None:
     @bot.message_handler(commands=["start"])
     def start_message(message):
         """Sends a welcome message"""
-        bot.send_message(message.chat.id, 'My name is Hans, I am from Munich. I know how to decode the equipment of\
-                                            your BMW! Just send me the VIN number:')
+        bot.send_message(message.chat.id, 'שלח מספר שלדה  של BMW שלך 
+        ונשלח לך קובץ PDF מכיל כול הפרטים על הרכב שלח..:')
 
     @bot.message_handler(content_types=["text"])
     def handle_text(message):
@@ -122,7 +122,7 @@ def telegram_bot(token: str) -> None:
                     bot.send_message(message.chat.id, 'Incorrect VIN number or something went wrong. Try again!')
 
         else:
-            bot.send_message(message.chat.id, 'Incorrect VIN number or something went wrong. Try again!')
+            bot.send_message(message.chat.id, 'מספר שלדה לא זוהה,נסה שוב!')
 
     while True:
         try:
