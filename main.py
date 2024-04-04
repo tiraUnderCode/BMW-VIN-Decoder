@@ -95,8 +95,7 @@ def telegram_bot(token: str) -> None:
     @bot.message_handler(commands=["start"])
     def start_message(message):
         """Sends a welcome message"""
-        bot.send_message(message.chat.id, 'שלח מספר שלדה  של BMW שלך 
-        ונשלח לך קובץ PDF מכיל כול הפרטים על הרכב שלח..:')
+        bot.send_message(message.chat.id, 'שלח מספר שלדה  של BMW של ונשלח לך קובץ PDF מכיל כול הפרטים על הרכב שלח..:')
 
     @bot.message_handler(content_types=["text"])
     def handle_text(message):
