@@ -95,51 +95,8 @@ def telegram_bot(token: str) -> None:
     @bot.message_handler(commands=["start"])
     def start_message(message):
         """Sends a welcome message"""
-        bot.send_message(message.chat.id, 'שלח מספר שלדה  של BMW של ונשלח לך קובץ PDF מכיל כול הפרטים על הרכב שלח..:')
+        bot.send_message(message.chat.id, 'My name is Hans, I am from Munich. I know how to decode the equipment of\
+                                            your BMW! Just send me the VIN number:')
 
     @bot.message_handler(content_types=["text"])
     def handle_text(message):
-        """Sends a PDF file with the equipment list of the requested VIN code"""
-
-        vin = message.text
-        print(f'Processing: {vin}')
-        bot.send_message(message.chat.id, "Processing your request, it takes a few minutes...")
-
-        if check_vin(vin):
-            if os.path.exists('./Storage/' + vin + '.pdf'):
-                bot.send_document(message.chat.id, document=open('./Storage/' + vin + '.pdf', 'rb'))
-                print('This VIN was already processed!')
-                print('The process is complete!')
-
-            else:
-                url_pdf = get_url_pdf(vin)
-                if url_pdf:
-                    save_pdf(url_pdf, vin)
-                    bot.send_document(message.chat.id, document=open('./Storage/' + vin + '.pdf', 'rb'))
-                    print('The process is complete!')
-                else:
-                    bot.send_message(message.chat.id, 'Incorrect VIN number or something went wrong. Try again!')
-
-        else:
-            bot.send_message(message.chat.id, 'מספר שלדה לא זוהה,נסה שוב!')
-
-    while True:
-        try:
-            bot.polling(none_stop=True)
-        except Exception as _ex:
-            print(_ex)
-            time.sleep(15)
-
-
-def main() -> None:
-    telegram_bot(os.getenv('BOT_TOKEN'))
-
-
-if __name__ == '__main__':
-    main()
-
-
-
-
-
-
